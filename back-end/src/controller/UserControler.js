@@ -27,16 +27,18 @@ const login = (req, res) => {
 
 const cadastrar = (req, res) => {
     const {nome, email, senha} = req.body
-    const sql = ('INSERT INTO usuarios (nome, email, senha) VALUE (?, ?, ?)')
+
+    if (!nome || !email || !senha) {
+       return res.status(400).json({ mensagem: "Dados incompletos"});
+    } 
+    
+    const sql = ('INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)')
 
     pool.query(sql, [nome, email, senha], (err, resultado) =>{
         if (err) {
-            res.status(400).json({ mensagem: "Dados incompletos"});
-        } 
-        if (err) {
-            res.status(500).json({ mensagem: "erro ao salvar no banco de dados"})
+            return res.status(500).json({ mensagem: "erro ao salvar no banco de dados", detalhe: err.code})
         } else{
-            res.status(200).json({ mensagem: "usuario cadastrado com secesso"}, resultado)
+            return res.status(200).json({ mensagem: "usuario cadastrado com secesso", dados: resultado})
         }
     })
 }
