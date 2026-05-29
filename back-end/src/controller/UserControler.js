@@ -6,7 +6,7 @@ const login = (req, res) => {
 
     pool.query(sql, [email], (err, resultado) => {
         if (err) {
-            return res.status(500).json({ mensagem: "erro do lado do servidor" })
+            return res.status(500).json({ mensagem: "erro do lado do servidor", detalhe: err.code})
         } 
         if (resultado.length === 0){
             return res.status(401).json({mensagem: "email ou senha incorretos"})
@@ -50,7 +50,7 @@ const atulizar = (req, res) => {
 
     pool.query(sql, [nome, email, senha, id], (err,resultado) => {
         if (err) {
-        return res.status(500).json({ mensagem: "Erro ao atualizar no banco", detalhes: err });
+        return res.status(500).json({ mensagem: "Erro ao atualizar no banco", detalhe: err.code});
         }
        if (resultado.affectedRows === 0) {
         return res.status(404).json({ mensagem: "Usuário não encontrado" });
@@ -67,7 +67,7 @@ const deletar_conta = (req, res) => {
 
     pool.query(sql, [id], (err, resultado) => {
         if (err) {
-            return res.status(500).json({mensagem: "erro do lado do servidor"})
+            return res.status(500).json({mensagem: "erro do lado do servidor", detalhe: err.code})
         } 
         if (resultado.affectedRows === 0) {
             return res.status(404).json({mensagem: "usuario nao encontrado"})

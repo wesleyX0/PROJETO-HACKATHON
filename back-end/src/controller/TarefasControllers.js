@@ -18,7 +18,7 @@ const cadastrarTarefa = (req, res) => {
     })
 }
 
-//LISTAGEM DE TAREFAS GET//
+//LISTAGEM DE TAREFAS PUT//
 const visualizarTarefas = (req, res) => {
     const { usuario_id } = req.params;
     const sql = 'SELECT * FROM tarefas WHERE usuario_id = ?';
@@ -32,7 +32,6 @@ const visualizarTarefas = (req, res) => {
         } else {
             return res.status(200).json(resultado);
         }
-
     });
 };
 
@@ -44,21 +43,53 @@ const deletarTarefas = (req, res) => {
 
     pool.query(sql, [id], (err, resultado) => {
         if (err) {
-            return res.status(500).json({mensagem: "erro para achar tarefa"})
+            return res.status(500).json({mensagem: "erro para achar tarefa", detalhe: err.code})
         }
         if (resultado.affectedRows === 0){
-            return res.status(401).json({mensagem: "Nenhuma tarefa encontrada"})
+            return res.status(404).json({mensagem: "Nenhuma tarefa encontrada"})
         } else {
             return res.status(200).json(resultado)
         }
+    })
+}
+//PUT PROGRESSO DAS TAREFA
+const atualizarProgresso = (req, res) => {
+    const {id} = req.params 
+    const sql = ('UPDATE tarefas SET act_pomodoros = act_pomodoros + 1 WHERE id = ?')
 
-        
+    pool.query(sql, [id], (err, resultado) => {
+        if (err) {
+            return res.status(500).json({mensagem: "erro no servidor", detalhe: err.code})
+        }
+        if (resultado.affectedRows === 0 ) {
+            return res.status(404).json({mensagem: "erro ao para achar tarefa"})
+        } else
+            return res.status(200).json({mensagem: "tarefa atualizada"})
     })
 }
 
+//GET VER TAREFAS FEITAS
+const concluirTarefa = (req, res) => {
+    const { id } = req.params; 
+    const sql = 'UPDATE tarefas SET status = "concluida" WHERE id = ?';
+
+    pool.query(sql, [id], (err, resultado) => {
+        if (err) {
+            return res.status(500).json({ mensagem: "Erro no servidor", detalhe: err.code });
+        }
+        
+        if (resultado.affectedRows === 0) {
+            return res.status(404).json({ mensagem: "Tarefa não encontrada" });
+        }
+
+        return res.status(200).json({ mensagem: "Tarefa concluída com sucesso!" });
+    });
+};
 
 module.exports = {
     cadastrarTarefa,
     visualizarTarefas,
-    deletarTarefas
+    deletarTarefas,
+    atualizarProgresso,
+    concluirTarefa
 }

@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const UserRouter = require('./src/router/UserRouter')
 const TarefasRouter = require('./src/router/TarefasRouter')
+const bemEstarRoutes = require('./src/router/BemEstarRouter')
 
 const app = express()
 const port = 3000
@@ -12,8 +13,7 @@ app.use(cors());
 app.use(express.json())
 app.use(UserRouter)
 app.use(TarefasRouter)
-
-
+app.use(bemEstarRoutes)
 
 app.listen(port, (err) => {
     if (err) {
@@ -22,3 +22,5 @@ app.listen(port, (err) => {
         console.log("servidor em acao");
     }
 })
+
+module.exports = app;

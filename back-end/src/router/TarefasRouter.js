@@ -1,8 +1,10 @@
-const tarefaController = require('../controller/TarefasControllers')
+const tarefasController = require('../controller/TarefasControllers')
 const router = require('express').Router()
 
-router.post('./cadastrarTarefa',tarefaController.cadastrarTarefa)
-router.get('./visualizarTarefa', tarefaController.visualizarTarefas)
-router.delete('./deletarTarefa', tarefaController.deletarTarefas)
+router.get('./visualizarTarefa', tarefasController.visualizarTarefas)
+router.post('./cadastrarTarefa',tarefasController.cadastrarTarefa)
+router.put('/tarefas/progresso/:id', tarefasController.atualizarProgresso);
+router.put('/tarefas/concluir/:id', tarefasController.concluirTarefa);
+router.delete('./deletarTarefa', tarefasController.deletarTarefas)
 
 module.exports = router
