@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowUp - Bem-estar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { fundo: '#0B0F19', card: '#151A2E', roxo: '#4F46E5', roxoClaro: '#6366F1', verde: '#10B981', azul: '#3B82F6' } } } }
+    </script>
+</head>
+<body class="bg-fundo text-white font-sans flex h-screen overflow-hidden">
+
+    <aside class="w-64 bg-fundo border-r border-gray-800 flex flex-col p-6 hidden md:flex justify-between h-full">
+        <div>
+            <div class="flex items-center gap-3 mb-10">
+                <div class="w-8 h-8 bg-roxo rounded-tl-lg rounded-br-lg rounded-tr-sm rounded-bl-sm flex items-center justify-center">🌸</div>
+                <h1 class="text-2xl font-bold">FlowUp</h1>
+            </div>
+            <nav class="flex flex-col gap-2 text-gray-400 text-sm font-medium">
+                <a href="index.html" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">🏠</span> Início</a>
+                <a href="foco.html" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">🎯</span> Foco</a>
+                <a href="#" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">📱</span> Tempo de tela</a>
+                <a href="bem-estar.html" class="bg-roxo text-white px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">🧘‍♀️</span> Bem-estar</a>
+                <a href="bem-estar.html" class="bg-roxo text-white px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">🌙</span> Sono</a>
+                <a href="historico.html" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3 mt-4 border-t border-gray-800 pt-6"><span class="text-lg">📊</span> Relatórios</a>
+                <a href="#" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">⚙️</span> Configurações</a>
+            </nav>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-6 md:p-10 overflow-y-auto pb-24 md:pb-10 flex flex-col items-center justify-center relative">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-verde/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="w-full max-w-md z-10">
+            <header class="mb-10 text-center">
+                <div class="w-16 h-16 bg-card border border-gray-800 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4">🌿</div>
+                <h2 class="text-3xl font-bold">Registro Diário</h2>
+                <p class="text-gray-400 mt-2 text-sm">Como foi a sua noite e como você está se sentindo hoje?</p>
+            </header>
+
+            <div class="bg-card p-8 rounded-3xl border border-gray-800 shadow-xl">
+                <div class="mb-6">
+                    <label class="block text-gray-300 font-medium mb-3 text-sm">Horas de sono (ex: 7.5)</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">🌙</span>
+                        <input type="number" id="horas-sono" step="0.5" placeholder="0.0" class="w-full bg-fundo border border-gray-700 rounded-xl py-3 pl-12 pr-4 text-white outline-none focus:border-roxo transition">
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <label class="block text-gray-300 font-medium mb-3 text-sm">Qual o seu humor?</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">💭</span>
+                        <select id="humor-select" class="w-full bg-fundo border border-gray-700 rounded-xl py-3 pl-12 pr-4 text-white outline-none focus:border-roxo transition appearance-none cursor-pointer">
+                            <option value="Ótimo">😄 Ótimo - Com muita energia</option>
+                            <option value="Bom">🙂 Bom - Tudo tranquilo</option>
+                            <option value="Neutro">😐 Neutro - Na média</option>
+                            <option value="Cansado">🥱 Cansado - Faltou energia</option>
+                            <option value="Estressado">😠 Estressado - Dia difícil</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-gray-400">▼</div>
+                    </div>
+                </div>
+
+                <button onclick="salvarBemEstar()" class="w-full bg-verde hover:bg-emerald-400 text-fundo font-bold py-4 rounded-xl transition shadow-lg shadow-verde/20">Registrar e Salvar</button>
+            </div>
+        </div>
+    </main>
+
+    <nav class="md:hidden fixed bottom-0 w-full bg-card border-t border-gray-800 flex justify-around p-3 z-50">
+        <a href="index.html" class="flex flex-col items-center text-gray-500 hover:text-white transition"><span class="text-xl">🏠</span></a>
+        <a href="foco.html" class="flex flex-col items-center text-gray-500 hover:text-white transition"><span class="text-xl">🎯</span></a>
+        <a href="bem-estar.html" class="flex flex-col items-center text-verde transition"><span class="text-xl">🌿</span></a>
+        <a href="historico.html" class="flex flex-col items-center text-gray-500 hover:text-white transition"><span class="text-xl">📊</span></a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>

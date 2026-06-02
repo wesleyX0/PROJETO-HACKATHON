@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowUp - Relatórios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { fundo: '#0B0F19', card: '#151A2E', roxo: '#4F46E5', roxoClaro: '#6366F1', verde: '#10B981', azul: '#3B82F6' } } } }
+    </script>
+</head>
+<body class="bg-fundo text-white font-sans flex h-screen overflow-hidden">
+
+    <aside class="w-64 bg-fundo border-r border-gray-800 flex flex-col p-6 hidden md:flex justify-between h-full">
+        <div>
+            <div class="flex items-center gap-3 mb-10">
+                <div class="w-8 h-8 bg-roxo rounded-tl-lg rounded-br-lg rounded-tr-sm rounded-bl-sm flex items-center justify-center">🌸</div>
+                <h1 class="text-2xl font-bold">FlowUp</h1>
+            </div>
+            <nav class="flex flex-col gap-2 text-gray-400 text-sm font-medium">
+                <a href="index.html" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">🏠</span> Início</a>
+                <a href="foco.html" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">🎯</span> Foco</a>
+                <a href="#" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">📱</span> Tempo de tela</a>
+                <a href="bem-estar.html" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">🧘‍♀️</span> Bem-estar</a>
+                <a href="bem-estar.html" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">🌙</span> Sono</a>
+                <a href="historico.html" class="bg-roxo text-white px-4 py-3 rounded-lg transition flex items-center gap-3 mt-4 border-t border-gray-800 pt-6"><span class="text-lg">📊</span> Relatórios</a>
+                <a href="#" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">⚙️</span> Configurações</a>
+            </nav>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-6 md:p-10 overflow-y-auto pb-24 md:pb-10">
+        
+        <header class="mb-10">
+            <h2 class="text-3xl font-bold">Relatórios e Histórico 📊</h2>
+            <p class="text-gray-400 mt-2 text-sm">Acompanhe seu progresso e evolução ao longo do tempo.</p>
+        </header>
+
+        <div class="bg-card rounded-2xl border border-gray-800 overflow-hidden">
+            <div class="bg-fundo/50 grid grid-cols-12 gap-4 p-4 border-b border-gray-800 text-xs text-gray-400 font-bold uppercase tracking-wider">
+                <div class="col-span-6 md:col-span-5">Atividade / Tarefa</div>
+                <div class="col-span-3 md:col-span-3 text-center">Status</div>
+                <div class="col-span-3 md:col-span-4 text-right pr-4">Progresso</div>
+            </div>
+            
+            <div id="lista-historico" class="divide-y divide-gray-800">
+                
+                <div class="grid grid-cols-12 gap-4 p-4 items-center hover:bg-fundo/30 transition">
+                    <div class="col-span-6 md:col-span-5 flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center text-sm">⏳</div>
+                        <div>
+                            <p class="font-bold text-sm text-white">Carregando dados...</p>
+                            <p class="text-xs text-gray-500">Conecte a API</p>
+                        </div>
+                    </div>
+                    <div class="col-span-3 md:col-span-3 text-center">
+                        <span class="bg-gray-800 text-gray-300 text-xs px-2 py-1 rounded-full font-medium">Pendente</span>
+                    </div>
+                    <div class="col-span-3 md:col-span-4 text-right pr-4">
+                        <p class="text-sm font-bold text-white">0 / 0 <span class="text-gray-500 text-xs font-normal">Pomodoros</span></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <nav class="md:hidden fixed bottom-0 w-full bg-card border-t border-gray-800 flex justify-around p-3 z-50">
+        <a href="index.html" class="flex flex-col items-center text-gray-500 hover:text-white transition"><span class="text-xl">🏠</span></a>
+        <a href="foco.html" class="flex flex-col items-center text-gray-500 hover:text-white transition"><span class="text-xl">🎯</span></a>
+        <a href="bem-estar.html" class="flex flex-col items-center text-gray-500 hover:text-white transition"><span class="text-xl">🌿</span></a>
+        <a href="historico.html" class="flex flex-col items-center text-roxoClaro transition"><span class="text-xl">📊</span></a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+</html>
