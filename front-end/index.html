@@ -6,21 +6,19 @@
     <title>FlowUp - Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        fundo: '#0B0F19', // Fundo principal
-                        card: '#151A2E',  // Fundo das caixas
-                        roxo: '#4F46E5',  // Botões e destaques
-                        roxoClaro: '#6366F1',
-                        verde: '#10B981', // Sucesso/Bom
-                        azul: '#3B82F6',  // Destaques secundários
-                    }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: { colors: { fundo: '#0B0F19', card: '#151A2E', roxo: '#4F46E5', roxoClaro: '#6366F1', verde: '#10B981', azul: '#3B82F6' } } } }
     </script>
+    <style>
+        /* A Mágica do Tema Claro */
+        :root { --fundo: #0B0F19; --card: #151A2E; --texto: #ffffff; --texto-sec: #9ca3af; --borda: #1f2937; }
+        .light-mode { --fundo: #f3f4f6; --card: #ffffff; --texto: #111827; --texto-sec: #4b5563; --borda: #e5e7eb; }
+        body { background-color: var(--fundo) !important; color: var(--texto) !important; transition: all 0.3s; }
+        .bg-fundo { background-color: var(--fundo) !important; }
+        .bg-card { background-color: var(--card) !important; }
+        .text-white { color: var(--texto) !important; }
+        .text-gray-400 { color: var(--texto-sec) !important; }
+        .border-gray-800 { border-color: var(--borda) !important; }
+    </style>
 </head>
 <body class="bg-fundo text-white font-sans flex h-screen overflow-hidden">
 
@@ -28,9 +26,8 @@
         <div>
             <div class="flex items-center gap-3 mb-10">
                 <div class="w-8 h-8 bg-roxo rounded-tl-lg rounded-br-lg rounded-tr-sm rounded-bl-sm flex items-center justify-center">🌸</div>
-                <h1 class="text-2xl font-bold">FlowUp</h1>
+                <h1 class="text-2xl font-bold text-white">FlowUp</h1>
             </div>
-            
             <nav class="flex flex-col gap-2 text-gray-400 text-sm font-medium">
                 <a href="index.html" class="bg-roxo text-white px-4 py-3 rounded-lg flex items-center gap-3"><span class="text-lg">🏠</span> Início</a>
                 <a href="foco.html" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">🎯</span> Foco</a>
@@ -41,15 +38,13 @@
                 <a href="#" class="hover:text-white hover:bg-card px-4 py-3 rounded-lg transition flex items-center gap-3"><span class="text-lg">⚙️</span> Configurações</a>
             </nav>
         </div>
-
         <div class="mt-8">
             <div class="bg-card p-4 rounded-xl border border-gray-800 mb-6 relative overflow-hidden">
                 <div class="text-roxoClaro text-xl mb-2">👑</div>
-                <h4 class="font-bold text-sm mb-1">Seja Pro</h4>
+                <h4 class="font-bold text-sm mb-1 text-white">Seja Pro</h4>
                 <p class="text-xs text-gray-400 mb-4">Desbloqueie todos os recursos e tenha uma experiência completa.</p>
                 <button class="w-full bg-roxo hover:bg-roxoClaro text-white text-xs font-bold py-2 rounded-lg transition">Ver planos</button>
             </div>
-            
             <div class="flex items-center gap-3 cursor-pointer hover:bg-card p-2 rounded-lg transition">
                 <div class="w-10 h-10 bg-azul rounded-full flex items-center justify-center text-lg">👤</div>
                 <div>
@@ -61,16 +56,14 @@
     </aside>
 
     <main class="flex-1 p-6 md:p-10 overflow-y-auto pb-24 md:pb-10 relative">
-        
         <div class="absolute top-6 right-8 hidden md:flex gap-4">
-            <button class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-gray-800 transition relative">
-                🔔 <span class="absolute top-2 right-2 w-2 h-2 bg-roxo rounded-full"></span>
-            </button>
+            <button onclick="trocarTema()" class="bg-roxo hover:bg-roxoClaro text-white font-bold py-2 px-4 rounded-lg transition text-sm">☀️ Modo Claro</button>
+            <button class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-gray-800 transition relative">🔔 <span class="absolute top-2 right-2 w-2 h-2 bg-roxo rounded-full"></span></button>
             <button class="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:bg-gray-800 transition">📅</button>
         </div>
 
         <header class="mb-10 mt-4 md:mt-0">
-            <h2 class="text-3xl font-bold">Olá, Wesley! 👋</h2>
+            <h2 class="text-3xl font-bold text-white">Olá, Wesley! 👋</h2>
             <p class="text-gray-400 mt-2 text-sm">Que bom te ver por aqui. Vamos cuidar do seu bem-estar hoje?</p>
         </header>
 
@@ -79,13 +72,13 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div>
                     <div class="w-10 h-10 rounded-full bg-roxo/20 text-roxo flex items-center justify-center mb-3">📱</div>
-                    <h4 class="text-2xl font-bold">4h 32m</h4>
+                    <h4 class="text-2xl font-bold text-white">4h 32m</h4>
                     <p class="text-gray-400 text-xs mt-1">Tempo de tela</p>
                     <p class="text-xs text-red-400 mt-1">+12% <span class="text-gray-500">em relação a ontem</span></p>
                 </div>
                 <div>
                     <div class="w-10 h-10 rounded-full bg-azul/20 text-azul flex items-center justify-center mb-3">🎯</div>
-                    <h4 class="text-2xl font-bold" id="resumo-foco">2h 15m</h4>
+                    <h4 class="text-2xl font-bold text-white" id="resumo-foco">2h 15m</h4>
                     <p class="text-gray-400 text-xs mt-1">Tempo de foco</p>
                     <p class="text-xs text-verde mt-1">+20% <span class="text-gray-500">em relação a ontem</span></p>
                 </div>
@@ -97,7 +90,7 @@
                 </div>
                 <div>
                     <div class="w-10 h-10 rounded-full bg-roxo/20 text-roxoClaro flex items-center justify-center mb-3">🌙</div>
-                    <h4 class="text-2xl font-bold" id="resumo-sono">7h 45m</h4>
+                    <h4 class="text-2xl font-bold text-white" id="resumo-sono">7h 45m</h4>
                     <p class="text-gray-400 text-xs mt-1">Horas de sono</p>
                     <p class="text-xs text-verde mt-1">+15% <span class="text-gray-500">em relação a ontem</span></p>
                 </div>
@@ -110,11 +103,9 @@
                 <div class="flex items-center gap-6 w-full">
                     <div class="w-16 h-16 rounded-full border-4 border-roxo border-t-gray-700 flex items-center justify-center text-xl font-bold"></div>
                     <div class="flex-1">
-                        <h4 class="font-bold">Sessão de Foco</h4>
+                        <h4 class="font-bold text-white">Sessão de Foco</h4>
                         <p class="text-sm text-gray-400 mb-3">Pomodoro • 25 min</p>
-                        <div class="w-full bg-gray-800 rounded-full h-1.5">
-                            <div class="bg-roxo h-1.5 rounded-full" style="width: 45%"></div>
-                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-roxo h-1.5 rounded-full" style="width: 45%"></div></div>
                         <p class="text-xs text-gray-400 mt-2">14 min restantes</p>
                     </div>
                 </div>
@@ -125,65 +116,36 @@
         <section class="mb-8">
             <h3 class="text-white font-bold mb-4">Acesso rápido</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                
                 <a href="foco.html" class="bg-card p-5 rounded-2xl border border-gray-800 hover:border-roxo transition group">
                     <div class="w-8 h-8 rounded-full bg-roxo/20 text-roxo flex items-center justify-center mb-4">⏱️</div>
-                    <h4 class="font-bold mb-1 group-hover:text-roxoClaro transition">Foco</h4>
+                    <h4 class="font-bold mb-1 group-hover:text-roxoClaro transition text-white">Foco</h4>
                     <p class="text-xs text-gray-400 mb-4">Use o Pomodoro e aumente sua concentração.</p>
-                    <span class="text-gray-500 group-hover:text-white transition">→</span>
                 </a>
-
                 <a href="#" class="bg-card p-5 rounded-2xl border border-gray-800 hover:border-azul transition group">
                     <div class="w-8 h-8 rounded-full bg-azul/20 text-azul flex items-center justify-center mb-4">📱</div>
-                    <h4 class="font-bold mb-1 group-hover:text-azul transition">Tempo de tela</h4>
+                    <h4 class="font-bold mb-1 group-hover:text-azul transition text-white">Tempo de tela</h4>
                     <p class="text-xs text-gray-400 mb-4">Acompanhe e reduza seu tempo de uso de dispositivos.</p>
-                    <span class="text-gray-500 group-hover:text-white transition">→</span>
                 </a>
-
                 <a href="bem-estar.html" class="bg-card p-5 rounded-2xl border border-gray-800 hover:border-verde transition group">
                     <div class="w-8 h-8 rounded-full bg-verde/20 text-verde flex items-center justify-center mb-4">🌿</div>
-                    <h4 class="font-bold mb-1 group-hover:text-verde transition">Bem-estar</h4>
+                    <h4 class="font-bold mb-1 group-hover:text-verde transition text-white">Bem-estar</h4>
                     <p class="text-xs text-gray-400 mb-4">Exercícios de respiração e meditação para seu equilíbrio.</p>
-                    <span class="text-gray-500 group-hover:text-white transition">→</span>
                 </a>
-
                 <a href="historico.html" class="bg-card p-5 rounded-2xl border border-gray-800 hover:border-roxoClaro transition group">
                     <div class="w-8 h-8 rounded-full bg-roxo/20 text-roxoClaro flex items-center justify-center mb-4">📊</div>
-                    <h4 class="font-bold mb-1 group-hover:text-roxoClaro transition">Relatórios</h4>
+                    <h4 class="font-bold mb-1 group-hover:text-roxoClaro transition text-white">Relatórios</h4>
                     <p class="text-xs text-gray-400 mb-4">Veja seus hábitos e sua evolução em gráficos.</p>
-                    <span class="text-gray-500 group-hover:text-white transition">→</span>
                 </a>
-
             </div>
         </section>
-
-        <section class="bg-gradient-to-r from-card to-[#1a1c3a] p-6 rounded-2xl border border-gray-800 flex items-center gap-4 relative overflow-hidden">
-            <div class="text-4xl text-roxo opacity-50">❝</div>
-            <div class="z-10">
-                <p class="text-gray-300 text-sm">Equilíbrio não é fazer mais.</p>
-                <h3 class="text-xl font-bold text-roxoClaro">É fazer melhor.</h3>
-                <p class="text-xs text-gray-500 mt-1">Pequenas escolhas, grandes mudanças.</p>
-            </div>
-            <div class="absolute right-0 bottom-0 opacity-20 text-8xl translate-x-4 translate-y-4">🌿</div>
-        </section>
-
     </main>
 
     <nav class="md:hidden fixed bottom-0 w-full bg-card border-t border-gray-800 flex justify-around p-3 z-50">
-        <a href="index.html" class="flex flex-col items-center text-roxoClaro transition">
-            <span class="text-xl">🏠</span>
-        </a>
-        <a href="foco.html" class="flex flex-col items-center text-gray-500 hover:text-white transition">
-            <span class="text-xl">🎯</span>
-        </a>
-        <a href="bem-estar.html" class="flex flex-col items-center text-gray-500 hover:text-white transition">
-            <span class="text-xl">🌿</span>
-        </a>
-        <a href="historico.html" class="flex flex-col items-center text-gray-500 hover:text-white transition">
-            <span class="text-xl">📊</span>
-        </a>
+        <a href="index.html" class="flex flex-col items-center text-roxoClaro transition"><span class="text-xl">🏠</span></a>
+        <a href="foco.html" class="flex flex-col items-center text-gray-500 hover:text-white transition"><span class="text-xl">🎯</span></a>
+        <a href="bem-estar.html" class="flex flex-col items-center text-gray-500 hover:text-white transition"><span class="text-xl">🌿</span></a>
+        <a href="historico.html" class="flex flex-col items-center text-gray-500 hover:text-white transition"><span class="text-xl">📊</span></a>
     </nav>
-
     <script src="script.js"></script>
 </body>
 </html>

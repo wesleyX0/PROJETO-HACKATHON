@@ -1,73 +1,45 @@
-async function buscarTarefas() {
-    try {
-        const resposta = await fetch('http://localhost:3000/tarefas/1');
-        const listaHtml = document.getElementById('lista-tarefas');
-        
-        listaHtml.innerHTML = '';
+const API_URL = 'http://localhost:3000';
 
-        if (!resposta.ok) {
-            const erroJson = await resposta.json();
-            listaHtml.innerHTML = `<li>${erroJson.mensagem} 😴</li>`;
-            return;
-        }
-        
-        const tarefas = await resposta.json();
-        
-        tarefas.forEach(tarefa => {
-            const item = document.createElement('li');
-            item.textContent = `${tarefa.titulo} - Status: ${tarefa.status}`;
-            listaHtml.appendChild(item);
-        });
-
-    } catch (erro) {
-        console.error("Erro:", erro);
-        alert("Servidor desligado!");
-    }
+// ==========================================
+// 1. ALTERNAR TEMA (ROXO ESCURO / BRANCO)
+// ==========================================
+function trocarTema() {
+    document.body.classList.toggle('light-mode');
+    const tema = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+    localStorage.setItem('temaFlowUp', tema);
 }
 
-async function cadastrarTarefa() {
+// Carrega o tema salvo quando abre a página
+window.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('temaFlowUp') === 'light') {
+        document.body.classList.add('light-mode');
+    }
+});
+
+// ==========================================
+// 2. LOGIN DA API
+// ==========================================
+async function fazerLogin(event) {
+    event.preventDefault();
+    const email = document.getElementById('email').value;
+    const senha = document.getElementById('senha').value;
+
     try {
-        // 1. PRIMEIRO preparamos a marmita (pegamos os valores)
-        const tituloDigitado = document.getElementById('titulo-tarefa').value; 
-        const pomodorosDigitado = document.getElementById('qtd-pomodoros').value;
-
-        // Montamos o objeto do jeito que o seu Back-end espera receber
-        const novaTarefa = {
-            titulo: tituloDigitado,
-            esc_pomodoro: pomodorosDigitado,
-            usuario_id: 1 // Estamos usando o usuário 1 como teste
-        };
-
-        // 2. AGORA chamamos o motoboy e entregamos a mochila pra ele
-        const resposta = await fetch('http://localhost:3000/tarefas', {
-            method: 'POST', // Avisamos que é para CADASTRAR
-            headers: {
-                'Content-Type': 'application/json' // Avisamos que a língua é JSON
-            },
-            body: JSON.stringify(novaTarefa) // Transformamos o objeto em texto pro motoboy levar
+        const res = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, senha })
         });
-
-        // 3. AQUI VOCÊ CONTINUA...
-        if (!resposta.ok) {
-            const erroJson = await resposta.json();
-            alert("Deu erro ao salvar: " + erroJson.mensagem);
-        } else {
-            // 1. Avisa o usuário
-            alert("Aeeee! Tarefa salva com sucesso no banco!");
-            
-            // 2. Limpa as caixinhas (é só pegar o campo e dizer que o valor dele é vazio '')
-            document.getElementById('titulo-tarefa').value = '';
-            document.getElementById('qtd-pomodoros').value = '';
-
-            // 3. O pulo do gato: a gente manda o sistema buscar as tarefas de novo pra tela atualizar!
-            buscarTarefas();
-        }
-
-    } catch(erro) {
-        // Mostra o erro técnico no F12 pra gente investigar
-        console.error("Deu ruim na comunicação:", erro);
         
-        // Avisa o usuário
-       alert("Deu erro ao salvar: " + erroJson.mensagem + " | Código: " + erroJson.detalhe);
+        const data = await res.json();
+        
+        if (res.ok) {
+            localStorage.setItem('usuarioLogado', JSON.stringify(data.usuario || { id: 1, nome: "Wesley" }));
+            window.location.href = 'index.html'; // Vai pro Dashboard
+        } else {
+            alert("Erro: " + (data.mensagem || "Credenciais inválidas"));
+        }
+    } catch (err) {
+        alert("Erro no servidor. O Back-end (Nodemon) está rodando?");
     }
 }

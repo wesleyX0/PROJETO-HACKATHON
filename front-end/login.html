@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowUp - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { fundo: '#0B0F19', card: '#151A2E', roxo: '#4F46E5' } } } }
+    </script>
+    <style>
+        /* A Mágica do Tema Claro que afeta as classes do Tailwind */
+        :root { --fundo: #0B0F19; --card: #151A2E; --texto: #ffffff; --texto-sec: #9ca3af; --borda: #1f2937; }
+        .light-mode { --fundo: #f3f4f6; --card: #ffffff; --texto: #111827; --texto-sec: #4b5563; --borda: #e5e7eb; }
+        body { background-color: var(--fundo) !important; color: var(--texto) !important; transition: all 0.3s; }
+        .bg-fundo { background-color: var(--fundo) !important; }
+        .bg-card { background-color: var(--card) !important; }
+        .text-white { color: var(--texto) !important; }
+        .text-gray-400 { color: var(--texto-sec) !important; }
+        .border-gray-800 { border-color: var(--borda) !important; }
+    </style>
+</head>
+<body class="bg-fundo text-white font-sans flex flex-col h-screen overflow-hidden items-center justify-center relative">
+    
+    <button onclick="trocarTema()" class="absolute top-6 right-6 bg-roxo hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg text-sm transition">☀️/🌙 Tema</button>
+
+    <div class="bg-card p-8 md:p-12 rounded-3xl border border-gray-800 shadow-2xl w-full max-w-md text-center z-10">
+        <div class="w-16 h-16 bg-roxo rounded-tl-xl rounded-br-xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-lg shadow-roxo/50">🌸</div>
+        <h1 class="text-3xl font-bold mb-2 text-white">FlowUp!</h1>
+        <p class="text-gray-400 text-sm mb-8">Produtividade sem perder sua paz.</p>
+
+        <form onsubmit="fazerLogin(event)" class="space-y-4 text-left">
+            <div>
+                <label class="block text-sm text-gray-400 mb-1">E-mail</label>
+                <input type="email" id="email" class="w-full bg-fundo border border-gray-800 rounded-xl p-3 text-white outline-none focus:border-roxo" placeholder="seu@email.com" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-sm text-gray-400 mb-1">Senha</label>
+                <input type="password" id="senha" class="w-full bg-fundo border border-gray-800 rounded-xl p-3 text-white outline-none focus:border-roxo" placeholder="Sua senha" required>
+            </div>
+            <button type="submit" class="w-full bg-roxo hover:bg-indigo-500 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-roxo/20 mt-4">Entrar</button>
+        </form>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
